@@ -60,6 +60,8 @@ SlidingSwitch(
  inactiveColor : const Color(0xff636f7b),
 ),
 ```
+Licensed Under the [MIT License](LICENSE).
+
 ## Inspiration
 
 [Jitu Raut](https://dribbble.com/shots/6190542-BMI-Calculator-Interaction)
