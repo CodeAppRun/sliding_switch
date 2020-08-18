@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sliding_switch/sliding_switch.dart';
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
