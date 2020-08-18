@@ -4,7 +4,7 @@ Sliding Switch - A simple switch widget. It can be fully customized with desired
 
 ## Live Demo (Codeapprun)
 
-[![codeapprun.io](https://raw.githubusercontent.com/acervenky/codeapprunbadge/master/assets/car1.svg)](https://codeapprun.io/sachindarde/widget/MgkxPPDfch)
+[![codeapprun.io](https://storage.googleapis.com/s3.codeapprun.io/assets/badge.svg)](codeapprun_widget_url)
 ## Getting Started
 
 In the `pubspec.yaml` of your flutter project, add the following dependency:

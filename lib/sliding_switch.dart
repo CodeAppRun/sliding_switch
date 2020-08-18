@@ -153,7 +153,7 @@ class _SlidingSwitch extends State<SlidingSwitch>
       (turnState)
           ? animationController.forward()
           : animationController.reverse();
-      widget.onChanged(turnState);
+      if (changeState) widget.onChanged(turnState);
     });
   }
 }
