@@ -89,9 +89,9 @@ packages:
   sliding_switch:
     dependency: "direct main"
     description:
-      path: ".."
-      relative: true
-    source: path
+      name: sliding_switch
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.2"
   source_span:
     dependency: transitive
