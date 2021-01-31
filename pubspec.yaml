@@ -1,6 +1,6 @@
 name: sliding_switch
 description:  Sliding Switch - A simple switch widget. It can be fully customized with desired width, colors, text etc. It also maintains selection state.
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/CodeAppRun/sliding_switch
 
 environment:

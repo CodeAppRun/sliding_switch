@@ -7,6 +7,9 @@ class SlidingSwitch extends StatefulWidget {
   final bool value;
   final String textOff;
   final String textOn;
+  final IconData iconOff;
+  final IconData iconOn;
+  final double contentSize;
   final Duration animationDuration;
   final Color colorOn;
   final Color colorOff;
@@ -28,6 +31,9 @@ class SlidingSwitch extends StatefulWidget {
     this.onSwipe,
     this.textOff = "Off",
     this.textOn = "On",
+    this.iconOff,
+    this.iconOn,
+    this.contentSize = 17,
     this.colorOn = const Color(0xffdc6c73),
     this.colorOff = const Color(0xff6682c0),
     this.background = const Color(0xffe4e5eb),
@@ -114,27 +120,43 @@ class _SlidingSwitch extends State<SlidingSwitch>
               children: [
                 Expanded(
                   child: Center(
-                    child: Text(
-                      widget.textOff,
-                      style: TextStyle(
+                    child: widget.iconOff == null
+                      ? Text(
+                          widget.textOff,
+                          style: TextStyle(
+                              color: turnState
+                                  ? widget.inactiveColor
+                                  : widget.colorOff,
+                              fontSize: widget.contentSize,
+                              fontWeight: FontWeight.w600),
+                        )
+                      : Icon(widget.iconOff,
+                          semanticLabel: widget.textOff,
+                          size: widget.contentSize,
                           color: turnState
                               ? widget.inactiveColor
                               : widget.colorOff,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600),
-                    ),
+                      ),
                   ),
                 ),
                 Expanded(
                   child: Center(
-                    child: Text(
-                      widget.textOn,
-                      style: TextStyle(
-                          color:
-                              turnState ? widget.colorOn : widget.inactiveColor,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600),
-                    ),
+                    child: widget.iconOn == null
+                    ? Text(
+                        widget.textOn,
+                        style: TextStyle(
+                            color:
+                                turnState ? widget.colorOn : widget.inactiveColor,
+                            fontSize: widget.contentSize,
+                            fontWeight: FontWeight.w600),
+                      )
+                    : Icon(widget.iconOn,
+                          semanticLabel: widget.textOn,
+                          size: widget.contentSize,
+                          color: turnState
+                              ? widget.colorOn
+                              : widget.inactiveColor,
+                      ),
                   ),
                 )
               ],
