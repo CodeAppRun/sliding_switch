@@ -5,8 +5,10 @@ class SlidingSwitch extends StatefulWidget {
   final ValueChanged<bool> onChanged;
   final double width;
   final bool value;
-  final String textOff;
-  final String textOn;
+  final Widget widgetOff;
+  final Widget widgetOn;
+  final Widget? widgetOffInactive;
+  final Widget? widgetOnInactive;
   final Duration animationDuration;
   final Color colorOn;
   final Color colorOff;
@@ -26,8 +28,10 @@ class SlidingSwitch extends StatefulWidget {
     required this.onTap,
     required this.onDoubleTap,
     required this.onSwipe,
-    this.textOff = "Off",
-    this.textOn = "On",
+    this.widgetOff = const Text("Off"),
+    this.widgetOn = const Text("On"),
+    this.widgetOffInactive,
+    this.widgetOnInactive,
     this.colorOn = const Color(0xffdc6c73),
     this.colorOff = const Color(0xff6682c0),
     this.background = const Color(0xffe4e5eb),
@@ -114,28 +118,15 @@ class _SlidingSwitch extends State<SlidingSwitch>
               children: [
                 Expanded(
                   child: Center(
-                    child: Text(
-                      widget.textOff,
-                      style: TextStyle(
-                          color: turnState
-                              ? widget.inactiveColor
-                              : widget.colorOff,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
+                      child: turnState
+                          ? widget.widgetOffInactive ?? widget.widgetOff
+                          : widget.widgetOff),
                 ),
                 Expanded(
                   child: Center(
-                    child: Text(
-                      widget.textOn,
-                      style: TextStyle(
-                          color:
-                              turnState ? widget.colorOn : widget.inactiveColor,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
+                      child: turnState
+                          ? widget.widgetOn
+                          : widget.widgetOnInactive ?? widget.widgetOn),
                 )
               ],
             )
