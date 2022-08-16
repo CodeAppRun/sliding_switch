@@ -8,3 +8,6 @@
     
 ## [0.0.3] - [2020/08/23]
     * Minor changes
+## [1.0.0] - [2020/08/23]
+    * Added Null Safety
+    * Removed conflict

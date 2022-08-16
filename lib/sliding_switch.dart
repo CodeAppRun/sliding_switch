@@ -21,14 +21,14 @@ class SlidingSwitch extends StatefulWidget {
   final Function onSwipe;
 
   const SlidingSwitch({
-    @required this.value,
-    @required this.onChanged,
+    required this.value,
+    required this.onChanged,
     this.height = 55,
     this.width = 250,
     this.animationDuration = const Duration(milliseconds: 400),
-    this.onTap,
-    this.onDoubleTap,
-    this.onSwipe,
+    required this.onTap,
+    required this.onDoubleTap,
+    required this.onSwipe,
     this.textOff = "Off",
     this.textOn = "On",
     this.iconOff,
@@ -46,11 +46,11 @@ class SlidingSwitch extends StatefulWidget {
 
 class _SlidingSwitch extends State<SlidingSwitch>
     with SingleTickerProviderStateMixin {
-  AnimationController animationController;
-  Animation<double> animation;
+  late AnimationController animationController;
+  late Animation<double> animation;
   double value = 0.0;
 
-  bool turnState;
+  late bool turnState;
 
   @override
   void dispose() {
