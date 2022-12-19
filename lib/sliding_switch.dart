@@ -19,6 +19,11 @@ class SlidingSwitch extends StatefulWidget {
   final Function? onTap;
   final Function? onDoubleTap;
   final Function? onSwipe;
+  final bool disabled;
+  final Function? disabledOnTap;
+  final Function? disabledOnDoubleTap;
+  final Function? disabledOnSwipe;
+
 
   const SlidingSwitch({
     required this.value,
@@ -39,6 +44,10 @@ class SlidingSwitch extends StatefulWidget {
     this.background = const Color(0xffe4e5eb),
     this.buttonColor = const Color(0xfff7f5f7),
     this.inactiveColor = const Color(0xff636f7b),
+    this.disabled = false,
+    this.disabledOnTap,
+    this.disabledOnDoubleTap,
+    this.disabledOnSwipe,
   }) : super();
   @override
   _SlidingSwitch createState() => _SlidingSwitch();
@@ -87,16 +96,28 @@ class _SlidingSwitch extends State<SlidingSwitch>
   Widget build(BuildContext context) {
     return GestureDetector(
         onDoubleTap: () {
-          _action();
-          if (widget.onDoubleTap != null) widget.onDoubleTap!();
+          if (widget.disabled) {
+            if (widget.disabledOnDoubleTap != null) widget.disabledOnDoubleTap!();
+          } else {
+            _action();
+            if (widget.onDoubleTap != null) widget.onDoubleTap!();
+          }
         },
         onTap: () {
-          _action();
-          if (widget.onTap != null) widget.onTap!();
+          if (widget.disabled) {
+            if (widget.disabledOnTap != null) widget.disabledOnTap!();
+          } else {
+            _action();
+            if (widget.onTap != null) widget.onTap!();
+          }
         },
         onPanEnd: (details) {
-          _action();
-          if (widget.onSwipe != null) widget.onSwipe!();
+          if (widget.disabled) {
+            if (widget.disabledOnSwipe != null) widget.disabledOnSwipe!();
+          } else {
+            _action();
+            if (widget.onSwipe != null) widget.onSwipe!();
+          }
         },
         child: Container(
           height: widget.height,
