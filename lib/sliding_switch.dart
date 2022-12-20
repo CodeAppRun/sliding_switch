@@ -7,8 +7,8 @@ class SlidingSwitch extends StatefulWidget {
   final bool value;
   final String textOff;
   final String textOn;
-  final IconData iconOff;
-  final IconData iconOn;
+  final IconData? iconOff;
+  final IconData? iconOn;
   final double contentSize;
   final Duration animationDuration;
   final Color colorOn;
@@ -16,9 +16,14 @@ class SlidingSwitch extends StatefulWidget {
   final Color background;
   final Color buttonColor;
   final Color inactiveColor;
-  final Function onTap;
-  final Function onDoubleTap;
-  final Function onSwipe;
+  final Function? onTap;
+  final Function? onDoubleTap;
+  final Function? onSwipe;
+  final bool disabled;
+  final Function? disabledOnTap;
+  final Function? disabledOnDoubleTap;
+  final Function? disabledOnSwipe;
+
 
   const SlidingSwitch({
     required this.value,
@@ -26,9 +31,9 @@ class SlidingSwitch extends StatefulWidget {
     this.height = 55,
     this.width = 250,
     this.animationDuration = const Duration(milliseconds: 400),
-    required this.onTap,
-    required this.onDoubleTap,
-    required this.onSwipe,
+    this.onTap,
+    this.onDoubleTap,
+    this.onSwipe,
     this.textOff = "Off",
     this.textOn = "On",
     this.iconOff,
@@ -39,6 +44,10 @@ class SlidingSwitch extends StatefulWidget {
     this.background = const Color(0xffe4e5eb),
     this.buttonColor = const Color(0xfff7f5f7),
     this.inactiveColor = const Color(0xff636f7b),
+    this.disabled = false,
+    this.disabledOnTap,
+    this.disabledOnDoubleTap,
+    this.disabledOnSwipe,
   }) : super();
   @override
   _SlidingSwitch createState() => _SlidingSwitch();
@@ -66,6 +75,12 @@ class _SlidingSwitch extends State<SlidingSwitch>
         lowerBound: 0.0,
         upperBound: 1.0,
         duration: widget.animationDuration);
+
+    if (widget.value) {
+      value = 1.0;
+      animationController.value = 1.0;
+    }
+
     animation =
         CurvedAnimation(parent: animationController, curve: Curves.easeInOut);
     animationController.addListener(() {
@@ -81,16 +96,28 @@ class _SlidingSwitch extends State<SlidingSwitch>
   Widget build(BuildContext context) {
     return GestureDetector(
         onDoubleTap: () {
-          _action();
-          if (widget.onDoubleTap != null) widget.onDoubleTap();
+          if (widget.disabled) {
+            if (widget.disabledOnDoubleTap != null) widget.disabledOnDoubleTap!();
+          } else {
+            _action();
+            if (widget.onDoubleTap != null) widget.onDoubleTap!();
+          }
         },
         onTap: () {
-          _action();
-          if (widget.onTap != null) widget.onTap();
+          if (widget.disabled) {
+            if (widget.disabledOnTap != null) widget.disabledOnTap!();
+          } else {
+            _action();
+            if (widget.onTap != null) widget.onTap!();
+          }
         },
         onPanEnd: (details) {
-          _action();
-          if (widget.onSwipe != null) widget.onSwipe();
+          if (widget.disabled) {
+            if (widget.disabledOnSwipe != null) widget.disabledOnSwipe!();
+          } else {
+            _action();
+            if (widget.onSwipe != null) widget.onSwipe!();
+          }
         },
         child: Container(
           height: widget.height,
